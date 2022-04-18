@@ -3,7 +3,7 @@ package Harcos;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Karakter {
+public abstract class Karakter implements java.io.Serializable{
 
     private String nev, faj;
     final ArrayList<Eszkoz> eszkozok;
@@ -16,7 +16,7 @@ public abstract class Karakter {
             throw new ArithmeticException("A megadott név nem lehet 3 betűnél rövidebb");//throw new ArithmeticException-> A throw kulcsszót főként egyéni kivételek dobására használják.  
         }
 
-    }
+    } 
 
     public String getNev() {
         return nev;

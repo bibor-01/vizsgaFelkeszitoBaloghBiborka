@@ -21,10 +21,9 @@ class UgyessegComparator implements Comparator<Harcos> {
     }
 }
 
-public class Harcos extends Karakter implements Iterable<Eszkoz> {
+public class Harcos extends Karakter implements Iterable<Eszkoz>, java.io.Serializable {
 
     private int ero, ugyesseg;
-
     public static EroComparator EroRendezo() {
         return new EroComparator();
     }
@@ -37,11 +36,13 @@ public class Harcos extends Karakter implements Iterable<Eszkoz> {
         super(nev, faj);
         this.ero = ero;
         this.ugyesseg = ugyesseg;
+
     }
 
     public Harcos(int ero, int ugyesseg, String nev) {
         this(ero, ugyesseg, nev, "ember");
     }
+
 
     public int getEro() {
         return ero;
@@ -82,7 +83,7 @@ public class Harcos extends Karakter implements Iterable<Eszkoz> {
         StringBuilder sb = new StringBuilder();
         sb.append("Harcos{" + "\nnev=" + this.getNev() + "\nfaj=" + this.getFaj());
         sb.append("\nerő=" + ero + "\nügyesség=" + ugyesseg + "\neszkozok=");
-        sb.append(rendezEszkoz() + "\n}");
+        sb.append(rendezEszkoz() + "\n }");
         return sb.toString();
     }
 }

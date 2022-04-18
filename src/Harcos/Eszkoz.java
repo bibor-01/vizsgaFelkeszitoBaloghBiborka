@@ -3,7 +3,7 @@ package Harcos;
 import java.text.Collator;
 import java.util.Objects;
 
-public class Eszkoz implements Comparable<Eszkoz> {
+public class Eszkoz implements Comparable<Eszkoz>, java.io.Serializable{
 
     private String nev;
     private double suly;
