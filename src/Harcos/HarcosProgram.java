@@ -11,15 +11,18 @@ public class HarcosProgram {
         //kivétel
         //Harcos h3 = new Harcos(5, 2, "P");
         Harcos h4 = new Harcos(10, 6, "Elfo", "manó");
-        h1.felveszEszkoz(new Eszkoz("Lánc", 500));
+        h2.felveszEszkoz(new Eszkoz("Lánc", 500));
         System.out.println(h1);
-        h1.eldobEszkoz(0);
+        h2.eldobEszkoz(0);
         System.out.println(h1);
 
-        for (Eszkoz eszkoz : h2) {
-            System.out.println(h2);
-        }
-
+//        for (Eszkoz eszkoz : h2) {
+//            System.out.println(h2);
+//        }
+        System.out.println("Iterálható példány:");
+        h2.forEach((eszkoz) -> {
+            System.out.println(eszkoz);
+        });
 
         //Serialize
         try {
@@ -35,7 +38,7 @@ public class HarcosProgram {
         System.out.println(h1);
 
         Harcos h5 = null;
-        
+
         //Deserialise
         try {
             FileInputStream fileIn = new FileInputStream("harcos.ser");
