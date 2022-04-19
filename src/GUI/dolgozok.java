@@ -9,6 +9,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
@@ -40,7 +42,7 @@ public class dolgozok extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         fiukJCB = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        mentJB = new javax.swing.JButton();
         osszesitoJP = new javax.swing.JPanel();
         lanyJRB = new javax.swing.JRadioButton();
         fiuJRB = new javax.swing.JRadioButton();
@@ -53,13 +55,10 @@ public class dolgozok extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lanyokJCB = new javax.swing.JComboBox<>();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        mindkettoNemJCB = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -71,7 +70,12 @@ public class dolgozok extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Ment");
+        mentJB.setText("Ment");
+        mentJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mentJBActionPerformed(evt);
+            }
+        });
 
         osszesitoJP.setBorder(javax.swing.BorderFactory.createTitledBorder("Összesítő"));
 
@@ -166,7 +170,7 @@ public class dolgozok extends javax.swing.JFrame {
             }
         });
 
-        jCheckBox1.setText("Mindkettő nem");
+        mindkettoNemJCB.setText("Mindkettő nem");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -188,8 +192,8 @@ public class dolgozok extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 5, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)))
+                            .addComponent(mentJB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(mindkettoNemJCB, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -212,9 +216,9 @@ public class dolgozok extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox1)
+                        .addComponent(mindkettoNemJCB)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(mentJB)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -250,41 +254,6 @@ public class dolgozok extends javax.swing.JFrame {
         eveDolgozoJL.setText("6 éve dolgozó:" + (hatEveDolgozo ? "van" : "nincs"));
     }//GEN-LAST:event_nemekJRBActionPerformed
 
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-//
-//       String line;
-//        File file = new File("emberek.txt");
-//        try {
-//            BufferedReader br = new BufferedReader(new FileReader(file));
-//            line = br.readLine();
-//            line = br.readLine();
-//            while (line != null) {
-//                String[] elemek = line.split(";");
-//                boolean neme = false;
-//                if (elemek[2].toUpperCase().equals("F")) {
-//                    fiukJCB.addItem(elemek[0]);
-//                    neme = true;
-//                } else {
-//                    lanyokJCB.addItem(elemek[0]);
-//                    neme = false;
-//                }
-//                int munkabanToltottEv = 0;
-//                if (elemek.length > 3) {
-//                    munkabanToltottEv = Integer.parseInt(elemek[3]);
-//                }
-//                emberek.add(new Ember(elemek[0], neme, Integer.parseInt(elemek[1]), munkabanToltottEv));
-//
-//                line = br.readLine();
-//
-//            }
-//            br.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-        //emberek.forEach((ember) -> System.out.println(ember.nev));
-    }//GEN-LAST:event_formWindowActivated
-
     private void lanyokJCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_lanyokJCBItemStateChanged
         for (int i = 0; i < emberek.size(); i++) {
             if (lanyokJCB.getSelectedItem() == emberek.get(i).nev) {
@@ -296,7 +265,6 @@ public class dolgozok extends javax.swing.JFrame {
     }//GEN-LAST:event_lanyokJCBItemStateChanged
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-
         String line;
         File file = new File("emberek.txt");
         try {
@@ -336,6 +304,29 @@ public class dolgozok extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_fiukJCBItemStateChanged
+
+    private void mentJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mentJBActionPerformed
+        if (lanyJRB.isSelected()) {
+            try {
+                FileWriter fw = new FileWriter("dolgozok.txt");
+                fw.write("lányok: \n"  + legidosebbJL.getText() + "\n" + osszesKorJL.getText() + "\n" + eveDolgozoJL.getText());
+                fw.close();
+                System.out.println("Sikeres fájlba írás!");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                FileWriter fw = new FileWriter("dolgozok.txt");
+                fw.write("fiúk: \n" + legidosebbJL.getText() + "\n" + osszesKorJL.getText() + "\n" + eveDolgozoJL.getText());
+                fw.close();
+                System.out.println("Sikeres fájlba írás!");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }//GEN-LAST:event_mentJBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -377,8 +368,6 @@ public class dolgozok extends javax.swing.JFrame {
     private javax.swing.JLabel eveDolgozoJL;
     private javax.swing.JRadioButton fiuJRB;
     private javax.swing.JComboBox<String> fiukJCB;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
@@ -386,6 +375,8 @@ public class dolgozok extends javax.swing.JFrame {
     private javax.swing.JRadioButton lanyJRB;
     private javax.swing.JComboBox<String> lanyokJCB;
     private javax.swing.JLabel legidosebbJL;
+    private javax.swing.JButton mentJB;
+    private javax.swing.JCheckBox mindkettoNemJCB;
     private javax.swing.JLabel miotaDolgozikJL;
     private javax.swing.JLabel osszesKorJL;
     private javax.swing.JPanel osszesitoJP;
