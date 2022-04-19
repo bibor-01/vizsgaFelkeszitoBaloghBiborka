@@ -231,10 +231,8 @@ public class dolgozok extends javax.swing.JFrame {
         boolean hatEveDolgozo = false;
         boolean keresendoNem = false;
         if (lanyJRB.isSelected()) {
-            System.out.println("lány");
             keresendoNem = false;
         } else {
-            System.out.println("fiú");
             keresendoNem = true;
         }
         for (int i = 0; i < emberek.size(); i++) {
@@ -306,26 +304,24 @@ public class dolgozok extends javax.swing.JFrame {
     }//GEN-LAST:event_fiukJCBItemStateChanged
 
     private void mentJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mentJBActionPerformed
-        if (lanyJRB.isSelected()) {
-            try {
-                FileWriter fw = new FileWriter("dolgozok.txt");
-                fw.write("lányok: \n"  + legidosebbJL.getText() + "\n" + osszesKorJL.getText() + "\n" + eveDolgozoJL.getText());
-                fw.close();
-                System.out.println("Sikeres fájlba írás!");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            try {
-                FileWriter fw = new FileWriter("dolgozok.txt");
-                fw.write("fiúk: \n" + legidosebbJL.getText() + "\n" + osszesKorJL.getText() + "\n" + eveDolgozoJL.getText());
-                fw.close();
-                System.out.println("Sikeres fájlba írás!");
-            } catch (IOException e) {
-                e.printStackTrace();
+        try {
+
+            FileWriter fw = new FileWriter("dolgozok.txt");
+            String neme = "";
+            if (lanyJRB.isSelected()) {
+                neme = "Lányok:\n";
+
+            } else {
+                neme = "Fiúk:\n";
             }
 
+            fw.write(neme + legidosebbJL.getText() + "\n" + osszesKorJL.getText() + "\n" + eveDolgozoJL.getText());
+            fw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
     }//GEN-LAST:event_mentJBActionPerformed
 
     /**
