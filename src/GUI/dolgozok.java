@@ -11,23 +11,21 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.ArrayList;
 
 /**
  *
  * @author Bibor
  */
-
-
 public class dolgozok extends javax.swing.JFrame {
-    private Ember emberek[];
-  
+
+    private ArrayList<Ember> emberek = new ArrayList<>();
+
     /**
      * Creates new form dolgozok
      */
     public dolgozok() {
         initComponents();
-       
-   
 
     }
 
@@ -40,11 +38,12 @@ public class dolgozok extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         fiukJCB = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         osszesitoJP = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        lanyJRB = new javax.swing.JRadioButton();
+        fiuJRB = new javax.swing.JRadioButton();
         legidosebbJL = new javax.swing.JLabel();
         osszesKorJL = new javax.swing.JLabel();
         eveDolgozoJL = new javax.swing.JLabel();
@@ -67,17 +66,19 @@ public class dolgozok extends javax.swing.JFrame {
 
         osszesitoJP.setBorder(javax.swing.BorderFactory.createTitledBorder("Összesítő"));
 
-        jRadioButton1.setText("lány");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(lanyJRB);
+        lanyJRB.setText("lány");
+        lanyJRB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                nemekJRBActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setText("fiú");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(fiuJRB);
+        fiuJRB.setText("fiú");
+        fiuJRB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                nemekJRBActionPerformed(evt);
             }
         });
 
@@ -96,9 +97,9 @@ public class dolgozok extends javax.swing.JFrame {
                 .addGroup(osszesitoJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(legidosebbJL)
                     .addGroup(osszesitoJPLayout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
+                        .addComponent(lanyJRB)
                         .addGap(18, 18, 18)
-                        .addComponent(jRadioButton2))
+                        .addComponent(fiuJRB))
                     .addComponent(osszesKorJL)
                     .addComponent(eveDolgozoJL))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -108,8 +109,8 @@ public class dolgozok extends javax.swing.JFrame {
             .addGroup(osszesitoJPLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(osszesitoJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(lanyJRB)
+                    .addComponent(fiuJRB))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(legidosebbJL)
                 .addGap(18, 18, 18)
@@ -211,27 +212,59 @@ public class dolgozok extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void nemekJRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nemekJRBActionPerformed
+        int legidosebb = 0;
+        int osszKor = 0;
+        boolean hatEveDolgozo = false;
+        boolean keresendoNem = false;
+        if (lanyJRB.isSelected()) {
+            System.out.println("lány");
+            keresendoNem = false;
+        } else {
+            System.out.println("fiú");
+            keresendoNem = true;
+        }
+        for (int i = 0; i < emberek.size(); i++) {
+            if (emberek.get(i).neme == keresendoNem) {
+                osszKor += emberek.get(i).kor;
+                if (legidosebb < emberek.get(i).kor) {
+                    legidosebb = emberek.get(i).kor;
+                }
+                if (emberek.get(i).munkabaToltEv >= 6) {
+                    hatEveDolgozo = true;
+                }
+            }
 
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
-
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+        }
+        legidosebbJL.setText("legidősebb:" + legidosebb + " éves");
+        osszesKorJL.setText("össz kor:" + osszKor + " év");
+        eveDolgozoJL.setText("6 éve dolgozó:" + (hatEveDolgozo ? "van" : "nincs"));
+    }//GEN-LAST:event_nemekJRBActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+
+        String line;
         File file = new File("emberek.txt");
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
-            String line = br.readLine();
+            line = br.readLine();
             line = br.readLine();
             while (line != null) {
                 String[] elemek = line.split(";");
+                boolean neme = false;
                 if (elemek[2].toUpperCase().equals("F")) {
                     fiukJCB.addItem(elemek[0]);
+                    neme = true;
                 } else {
                     lanyokJCB.addItem(elemek[0]);
+                    neme = false;
                 }
+                int munkabanToltottEv = 0;
+                if (elemek.length > 3) {
+                    munkabanToltottEv = Integer.parseInt(elemek[3]);
+                }
+                emberek.add(new Ember(elemek[0], neme, Integer.parseInt(elemek[1]), munkabanToltottEv));
+
                 line = br.readLine();
 
             }
@@ -239,14 +272,17 @@ public class dolgozok extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        //emberek.forEach((ember) -> System.out.println(ember.nev));
     }//GEN-LAST:event_formWindowActivated
 
     private void lanyokJCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_lanyokJCBItemStateChanged
-        
+
     }//GEN-LAST:event_lanyokJCBItemStateChanged
 
     private void lanyokJCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lanyokJCBActionPerformed
-//     legidosebbJL.setText(legidosebbJL.getText()+lanyokJCB.);
+
+
     }//GEN-LAST:event_lanyokJCBActionPerformed
 
     /**
@@ -285,16 +321,17 @@ public class dolgozok extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel eveDolgozoJL;
+    private javax.swing.JRadioButton fiuJRB;
     private javax.swing.JComboBox<String> fiukJCB;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JLabel korJL;
+    private javax.swing.JRadioButton lanyJRB;
     private javax.swing.JComboBox<String> lanyokJCB;
     private javax.swing.JLabel legidosebbJL;
     private javax.swing.JLabel miotaDolgozikJL;

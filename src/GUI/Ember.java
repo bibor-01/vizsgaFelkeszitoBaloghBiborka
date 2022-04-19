@@ -15,4 +15,13 @@ public class Ember {
     int kor;
     int munkabaToltEv;
 
+    public Ember(String nev, boolean neme, int kor, int munkabaToltEv) {
+        this.nev = nev;
+        this.neme = neme;
+        this.kor = kor;
+        this.munkabaToltEv = munkabaToltEv;
+    }
+    
+    
+
 }
