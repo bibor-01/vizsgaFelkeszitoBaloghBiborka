@@ -5,17 +5,30 @@
  */
 package GUI;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+
 /**
  *
  * @author Bibor
  */
-public class dolgozok extends javax.swing.JPanel {
 
+
+public class dolgozok extends javax.swing.JFrame {
+    private Ember emberek[];
+  
     /**
      * Creates new form dolgozok
      */
     public dolgozok() {
         initComponents();
+       
+   
+
     }
 
     /**
@@ -27,81 +40,86 @@ public class dolgozok extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        jLabel1 = new javax.swing.JLabel();
         fiukJCB = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        lanyokJCB = new javax.swing.JComboBox<>();
-        jPanel1 = new javax.swing.JPanel();
-        lanyJRB = new javax.swing.JRadioButton();
-        fiuJRB = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
+        osszesitoJP = new javax.swing.JPanel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
         legidosebbJL = new javax.swing.JLabel();
         osszesKorJL = new javax.swing.JLabel();
-        eveDolgozikJL = new javax.swing.JLabel();
+        eveDolgozoJL = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         korJL = new javax.swing.JLabel();
         miotaDolgozikJL = new javax.swing.JLabel();
-        mindkettoNemJCB = new javax.swing.JCheckBox();
-        mentJB = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        lanyokJCB = new javax.swing.JComboBox<>();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
-        jLabel1.setText("Lányok");
-
-        jLabel2.setText("Fiúk");
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("összesítő"));
-        jPanel1.setToolTipText("");
-        jPanel1.setName(""); // NOI18N
-
-        buttonGroup1.add(lanyJRB);
-        lanyJRB.setText("lány");
-        lanyJRB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lanyJRBActionPerformed(evt);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
             }
         });
 
-        buttonGroup1.add(fiuJRB);
-        fiuJRB.setText("fiú");
+        jButton1.setText("Ment");
+
+        osszesitoJP.setBorder(javax.swing.BorderFactory.createTitledBorder("Összesítő"));
+
+        jRadioButton1.setText("lány");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+
+        jRadioButton2.setText("fiú");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         legidosebbJL.setText("legidősebb:");
 
         osszesKorJL.setText("összes kor:");
 
-        eveDolgozikJL.setText("6 éve dolgozó:");
+        eveDolgozoJL.setText("6 éve dolgozó:");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout osszesitoJPLayout = new javax.swing.GroupLayout(osszesitoJP);
+        osszesitoJP.setLayout(osszesitoJPLayout);
+        osszesitoJPLayout.setHorizontalGroup(
+            osszesitoJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(osszesitoJPLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lanyJRB)
-                        .addGap(37, 37, 37)
-                        .addComponent(fiuJRB))
+                .addGroup(osszesitoJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(legidosebbJL)
+                    .addGroup(osszesitoJPLayout.createSequentialGroup()
+                        .addComponent(jRadioButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jRadioButton2))
                     .addComponent(osszesKorJL)
-                    .addComponent(eveDolgozikJL))
-                .addContainerGap(89, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lanyJRB)
-                    .addComponent(fiuJRB))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(legidosebbJL)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(osszesKorJL)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(eveDolgozikJL)
+                    .addComponent(eveDolgozoJL))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+        osszesitoJPLayout.setVerticalGroup(
+            osszesitoJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(osszesitoJPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(osszesitoJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(legidosebbJL)
+                .addGap(18, 18, 18)
+                .addComponent(osszesKorJL)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addComponent(eveDolgozoJL)
+                .addContainerGap())
+        );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("adatok"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Adatok"));
 
         korJL.setText("kor:");
 
@@ -116,49 +134,58 @@ public class dolgozok extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(korJL)
                     .addComponent(miotaDolgozikJL))
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(korJL)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(miotaDolgozikJL)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        mindkettoNemJCB.setText("Mindkettő nem");
-        mindkettoNemJCB.addActionListener(new java.awt.event.ActionListener() {
+        jLabel1.setText("Lányok");
+
+        jLabel2.setText("Fiúk");
+
+        lanyokJCB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                lanyokJCBItemStateChanged(evt);
+            }
+        });
+        lanyokJCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mindkettoNemJCBActionPerformed(evt);
+                lanyokJCBActionPerformed(evt);
             }
         });
 
-        mentJB.setText("Ment");
+        jCheckBox1.setText("Mindkettő nem");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lanyokJCB, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fiukJCB, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(16, 16, 16)
+                        .addComponent(lanyokJCB, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(osszesitoJP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(mindkettoNemJCB)
-                            .addComponent(mentJB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel2)
+                        .addGap(17, 17, 17)
+                        .addComponent(fiukJCB, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,47 +196,109 @@ public class dolgozok extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addComponent(lanyokJCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(fiukJCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(osszesitoJP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mindkettoNemJCB)
-                        .addGap(18, 18, 18)
-                        .addComponent(mentJB))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                        .addComponent(jCheckBox1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.getAccessibleContext().setAccessibleName("összesítő");
-        jPanel2.getAccessibleContext().setAccessibleName("Adatok");
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lanyJRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lanyJRBActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lanyJRBActionPerformed
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
 
-    private void mindkettoNemJCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mindkettoNemJCBActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mindkettoNemJCBActionPerformed
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
 
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        File file = new File("emberek.txt");
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line = br.readLine();
+            line = br.readLine();
+            while (line != null) {
+                String[] elemek = line.split(";");
+                if (elemek[2].toUpperCase().equals("F")) {
+                    fiukJCB.addItem(elemek[0]);
+                } else {
+                    lanyokJCB.addItem(elemek[0]);
+                }
+                line = br.readLine();
+
+            }
+            br.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_formWindowActivated
+
+    private void lanyokJCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_lanyokJCBItemStateChanged
+        
+    }//GEN-LAST:event_lanyokJCBItemStateChanged
+
+    private void lanyokJCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lanyokJCBActionPerformed
+//     legidosebbJL.setText(legidosebbJL.getText()+lanyokJCB.);
+    }//GEN-LAST:event_lanyokJCBActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(dolgozok.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(dolgozok.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(dolgozok.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(dolgozok.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new dolgozok().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JLabel eveDolgozikJL;
-    private javax.swing.JRadioButton fiuJRB;
+    private javax.swing.JLabel eveDolgozoJL;
     private javax.swing.JComboBox<String> fiukJCB;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JLabel korJL;
-    private javax.swing.JRadioButton lanyJRB;
     private javax.swing.JComboBox<String> lanyokJCB;
     private javax.swing.JLabel legidosebbJL;
-    private javax.swing.JButton mentJB;
-    private javax.swing.JCheckBox mindkettoNemJCB;
     private javax.swing.JLabel miotaDolgozikJL;
     private javax.swing.JLabel osszesKorJL;
+    private javax.swing.JPanel osszesitoJP;
     // End of variables declaration//GEN-END:variables
 }
