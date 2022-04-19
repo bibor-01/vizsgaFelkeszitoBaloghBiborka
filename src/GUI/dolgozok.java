@@ -60,6 +60,15 @@ public class dolgozok extends javax.swing.JFrame {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
+
+        fiukJCB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                fiukJCBItemStateChanged(evt);
+            }
         });
 
         jButton1.setText("Ment");
@@ -156,11 +165,6 @@ public class dolgozok extends javax.swing.JFrame {
                 lanyokJCBItemStateChanged(evt);
             }
         });
-        lanyokJCB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lanyokJCBActionPerformed(evt);
-            }
-        });
 
         jCheckBox1.setText("Mindkettő nem");
 
@@ -173,19 +177,24 @@ public class dolgozok extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(16, 16, 16)
-                        .addComponent(lanyokJCB, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(osszesitoJP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lanyokJCB, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
-                        .addGap(17, 17, 17)
-                        .addComponent(fiukJCB, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(osszesitoJP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 5, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fiukJCB, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -242,6 +251,51 @@ public class dolgozok extends javax.swing.JFrame {
     }//GEN-LAST:event_nemekJRBActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+//
+//       String line;
+//        File file = new File("emberek.txt");
+//        try {
+//            BufferedReader br = new BufferedReader(new FileReader(file));
+//            line = br.readLine();
+//            line = br.readLine();
+//            while (line != null) {
+//                String[] elemek = line.split(";");
+//                boolean neme = false;
+//                if (elemek[2].toUpperCase().equals("F")) {
+//                    fiukJCB.addItem(elemek[0]);
+//                    neme = true;
+//                } else {
+//                    lanyokJCB.addItem(elemek[0]);
+//                    neme = false;
+//                }
+//                int munkabanToltottEv = 0;
+//                if (elemek.length > 3) {
+//                    munkabanToltottEv = Integer.parseInt(elemek[3]);
+//                }
+//                emberek.add(new Ember(elemek[0], neme, Integer.parseInt(elemek[1]), munkabanToltottEv));
+//
+//                line = br.readLine();
+//
+//            }
+//            br.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+        //emberek.forEach((ember) -> System.out.println(ember.nev));
+    }//GEN-LAST:event_formWindowActivated
+
+    private void lanyokJCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_lanyokJCBItemStateChanged
+        for (int i = 0; i < emberek.size(); i++) {
+            if (lanyokJCB.getSelectedItem() == emberek.get(i).nev) {
+                korJL.setText("kor: " + emberek.get(i).kor + " év");
+                miotaDolgozikJL.setText("mióta dolgozik: " + emberek.get(i).munkabaToltEv + " éve");
+            }
+        }
+
+    }//GEN-LAST:event_lanyokJCBItemStateChanged
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
         String line;
         File file = new File("emberek.txt");
@@ -272,18 +326,16 @@ public class dolgozok extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }//GEN-LAST:event_formWindowOpened
 
-        //emberek.forEach((ember) -> System.out.println(ember.nev));
-    }//GEN-LAST:event_formWindowActivated
-
-    private void lanyokJCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_lanyokJCBItemStateChanged
-
-    }//GEN-LAST:event_lanyokJCBItemStateChanged
-
-    private void lanyokJCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lanyokJCBActionPerformed
-
-
-    }//GEN-LAST:event_lanyokJCBActionPerformed
+    private void fiukJCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_fiukJCBItemStateChanged
+        for (int i = 0; i < emberek.size(); i++) {
+            if (fiukJCB.getSelectedItem() == emberek.get(i).nev) {
+                korJL.setText("kor: " + emberek.get(i).kor + " év");
+                miotaDolgozikJL.setText("mióta dolgozik: " + emberek.get(i).munkabaToltEv + " éve");
+            }
+        }
+    }//GEN-LAST:event_fiukJCBItemStateChanged
 
     /**
      * @param args the command line arguments
